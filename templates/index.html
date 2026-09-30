@@ -10,7 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>IRIS AI • Smart Flower Classification</title>
+    <title>IRIS AI | Trang chủ</title>
 
     <link
         rel="stylesheet"
@@ -23,24 +23,27 @@
 
 <header class="navbar">
 
-    <a href="/" class="logo">
-        IRIS<span>AI</span>
+    <a href="/" class="brand">
+        <span class="brand-icon">✿</span>
+        IRIS AI
     </a>
 
     <nav>
 
-        <a href="/">Home</a>
+        <a href="/" class="active">
+            Trang chủ
+        </a>
 
         <a href="/predict">
-            Identify
+            🔍 Tìm hoa
         </a>
 
-        <a href="/analytics">
-            Analytics
+        <a href="/visualization">
+            📊 Trực quan
         </a>
 
-        <a href="/flowers">
-            Iris
+        <a href="/species">
+            🌸 Các loài hoa
         </a>
 
     </nav>
@@ -48,171 +51,258 @@
 </header>
 
 
-<main class="hero">
+<main>
 
-    <section class="hero-text">
+<section class="hero">
 
-        <div class="badge">
-            ✦ SVM MACHINE LEARNING
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            ARTIFICIAL INTELLIGENCE · SVM
         </div>
 
         <h1>
-            Intelligent
-            <span>Flower</span>
-            Classification
+            Khám phá thế giới
+            <span>Iris</span>
         </h1>
 
-        <p>
-            Khám phá sức mạnh của Machine Learning
-            thông qua mô hình SVM phân loại hoa Iris.
+        <p class="hero-text">
+
+            Một ứng dụng Machine Learning hiện đại sử dụng
+            Support Vector Machine để phân loại hoa Iris
+            dựa trên bốn đặc trưng hình thái.
+
         </p>
 
         <div class="hero-buttons">
 
             <a
                 href="/predict"
-                class="btn primary"
+                class="btn btn-primary"
             >
                 ✦ Bắt đầu nhận diện
             </a>
 
             <a
-                href="/analytics"
-                class="btn secondary"
+                href="/visualization"
+                class="btn btn-secondary"
             >
-                Xem dữ liệu
+                📊 Xem dữ liệu
             </a>
 
         </div>
 
-    </section>
+    </div>
 
 
-    <section class="flower-orbit">
+    <div class="hero-flower">
 
-        <div class="orbit"></div>
+        <div class="flower-orbit orbit-1"></div>
 
-        <div class="flower-card">
+        <div class="flower-orbit orbit-2"></div>
 
-            <div class="flower-icon">
-                🌸
-            </div>
-
-            <h2>IRIS</h2>
-
-            <p>
-                AI Flower Intelligence
-            </p>
-
+        <div class="flower-emoji">
+            🌸
         </div>
 
-    </section>
+    </div>
 
-</main>
+</section>
 
 
 <section class="stats">
 
-    <div>
+    <div class="stat-card">
+
         <strong>150</strong>
-        <span>Samples</span>
+
+        <span>
+            Mẫu dữ liệu
+        </span>
+
     </div>
 
-    <div>
-        <strong>3</strong>
-        <span>Species</span>
-    </div>
+    <div class="stat-card">
 
-    <div>
         <strong>4</strong>
-        <span>Features</span>
+
+        <span>
+            Đặc trưng
+        </span>
+
     </div>
 
-    <div>
+    <div class="stat-card">
+
+        <strong>3</strong>
+
+        <span>
+            Loài hoa
+        </span>
+
+    </div>
+
+    <div class="stat-card">
+
         <strong>SVM</strong>
-        <span>Algorithm</span>
+
+        <span>
+            Mô hình AI
+        </span>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="section-title">
+
+        <span>
+            EXPLORE
+        </span>
+
+        <h2>
+            Một hệ thống, bốn trải nghiệm
+        </h2>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+
+        <a
+            href="/predict"
+            class="feature-card"
+        >
+
+            <div class="feature-icon">
+                🔬
+            </div>
+
+            <h3>
+                Nhận diện hoa
+            </h3>
+
+            <p>
+                Nhập bốn thông số của hoa
+                và để mô hình SVM dự đoán loài tương ứng.
+            </p>
+
+            <span class="feature-link">
+                Bắt đầu →
+            </span>
+
+        </a>
+
+
+        <a
+            href="/visualization"
+            class="feature-card"
+        >
+
+            <div class="feature-icon">
+                📊
+            </div>
+
+            <h3>
+                Trực quan dữ liệu
+            </h3>
+
+            <p>
+                Quan sát mối quan hệ giữa các đặc trưng
+                trong bộ dữ liệu Iris.
+            </p>
+
+            <span class="feature-link">
+                Khám phá →
+            </span>
+
+        </a>
+
+
+        <a
+            href="/species"
+            class="feature-card"
+        >
+
+            <div class="feature-icon">
+                🌺
+            </div>
+
+            <h3>
+                Thông tin loài hoa
+            </h3>
+
+            <p>
+                Tìm hiểu chi tiết về Setosa,
+                Versicolor và Virginica.
+            </p>
+
+            <span class="feature-link">
+                Xem thông tin →
+            </span>
+
+        </a>
+
+
+        <a
+            href="/analytics"
+            class="feature-card"
+        >
+
+            <div class="feature-icon">
+                🎯
+            </div>
+
+            <h3>
+                Đánh giá mô hình
+            </h3>
+
+            <p>
+                Xem Accuracy, Precision, Recall,
+                F1-score và ma trận nhầm lẫn.
+            </p>
+
+            <span class="feature-link">
+                Đánh giá →
+            </span>
+
+        </a>
+
     </div>
 
 </section>
 
 
-<section class="features">
+<section class="quote-section">
 
-    <div class="feature">
-
-        <div class="feature-icon">
-            🔍
-        </div>
-
-        <h3>
-            Nhận diện thông minh
-        </h3>
-
-        <p>
-            Nhập 4 thông số của hoa và
-            để mô hình SVM dự đoán loài.
-        </p>
-
-        <a href="/predict">
-            Khám phá →
-        </a>
-
+    <div class="quote-icon">
+        ❝
     </div>
 
-
-    <div class="feature">
-
-        <div class="feature-icon">
-            📊
-        </div>
-
-        <h3>
-            Trực quan dữ liệu
-        </h3>
-
-        <p>
-            Khám phá dữ liệu Iris bằng
-            các biểu đồ trực quan.
-        </p>
-
-        <a href="/analytics">
-            Xem biểu đồ →
-        </a>
-
-    </div>
-
-
-    <div class="feature">
-
-        <div class="feature-icon">
-            🌺
-        </div>
-
-        <h3>
-            Khám phá Iris
-        </h3>
-
-        <p>
-            Tìm hiểu đặc điểm của
-            từng loài hoa Iris.
-        </p>
-
-        <a href="/flowers">
-            Khám phá →
-        </a>
-
-    </div>
+    <p>
+        Từ những phép đo đơn giản của một bông hoa,
+        mô hình học máy có thể tìm ra mẫu hình
+        và đưa ra dự đoán.
+    </p>
 
 </section>
+
+</main>
 
 
 <footer>
 
-    FASTAPI
-    <span>+</span>
-    SVM
-    <span>+</span>
-    MACHINE LEARNING
+    <span>
+        IRIS AI · FastAPI + SVM
+    </span>
+
+    <span>
+        Machine Learning Project
+    </span>
 
 </footer>
 

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        IRIS AI | Trực quan dữ liệu
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/style.css"
+    >
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <a href="/" class="brand">
+        <span class="brand-icon">✿</span>
+        IRIS AI
+    </a>
+
+    <nav>
+
+        <a href="/">
+            Trang chủ
+        </a>
+
+        <a href="/predict">
+            🔍 Tìm hoa
+        </a>
+
+        <a href="/visualization" class="active">
+            📊 Trực quan
+        </a>
+
+        <a href="/species">
+            🌸 Các loài hoa
+        </a>
+
+    </nav>
+
+</header>
+
+
+<main class="page">
+
+    <section class="page-header">
+
+        <div class="eyebrow">
+            DATA VISUALIZATION
+        </div>
+
+        <h1>
+            Trực quan hóa bộ dữ liệu Iris
+        </h1>
+
+        <p>
+            Quan sát sự khác biệt giữa ba loài hoa
+            thông qua bốn đặc trưng hình thái.
+        </p>
+
+    </section>
+
+
+    <section class="dashboard-grid">
+
+
+        <div class="glass-card chart-card">
+
+            <div class="chart-title">
+
+                <div>
+
+                    <span class="small-label">
+                        FEATURE
+                    </span>
+
+                    <h2>
+                        So sánh kích thước cánh hoa
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="bar-chart">
+
+                <div class="bar-row">
+
+                    <span>
+                        Setosa
+                    </span>
+
+                    <div class="bar-track">
+
+                        <div
+                            class="bar bar-setosa"
+                            style="width: 30%"
+                        ></div>
+
+                    </div>
+
+                    <strong>
+                        1.46
+                    </strong>
+
+                </div>
+
+
+                <div class="bar-row">
+
+                    <span>
+                        Versicolor
+                    </span>
+
+                    <div class="bar-track">
+
+                        <div
+                            class="bar bar-versicolor"
+                            style="width: 54%"
+                        ></div>
+
+                    </div>
+
+                    <strong>
+                        4.26
+                    </strong>
+
+                </div>
+
+
+                <div class="bar-row">
+
+                    <span>
+                        Virginica
+                    </span>
+
+                    <div class="bar-track">
+
+                        <div
+                            class="bar bar-virginica"
+                            style="width: 86%"
+                        ></div>
+
+                    </div>
+
+                    <strong>
+                        5.55
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <p class="chart-note">
+                Giá trị trung bình Petal Length.
+            </p>
+
+        </div>
+
+
+        <div class="glass-card chart-card">
+
+            <span class="small-label">
+                DATASET
+            </span>
+
+            <h2>
+                Cấu trúc dữ liệu
+            </h2>
+
+
+            <div class="dataset-stats">
+
+                <div>
+                    <strong>150</strong>
+                    <span>Mẫu</span>
+                </div>
+
+                <div>
+                    <strong>4</strong>
+                    <span>Đặc trưng</span>
+                </div>
+
+                <div>
+                    <strong>3</strong>
+                    <span>Class</span>
+                </div>
+
+            </div>
+
+
+            <div class="feature-list">
+
+                <div>
+                    <span>
+                        Sepal Length
+                    </span>
+                    <b>cm</b>
+                </div>
+
+                <div>
+                    <span>
+                        Sepal Width
+                    </span>
+                    <b>cm</b>
+                </div>
+
+                <div>
+                    <span>
+                        Petal Length
+                    </span>
+                    <b>cm</b>
+                </div>
+
+                <div>
+                    <span>
+                        Petal Width
+                    </span>
+                    <b>cm</b>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="glass-card wide-card">
+
+            <span class="small-label">
+                IRIS DISTRIBUTION
+            </span>
+
+            <h2>
+                Mối quan hệ giữa Petal Length và Petal Width
+            </h2>
+
+
+            <div class="scatter">
+
+                <span class="dot d1"></span>
+                <span class="dot d2"></span>
+                <span class="dot d3"></span>
+                <span class="dot d4"></span>
+                <span class="dot d5"></span>
+                <span class="dot d6"></span>
+                <span class="dot d7"></span>
+                <span class="dot d8"></span>
+                <span class="dot d9"></span>
+                <span class="dot d10"></span>
+
+            </div>
+
+
+            <div class="legend">
+
+                <span>
+                    <i class="legend-dot setosa"></i>
+                    Setosa
+                </span>
+
+                <span>
+                    <i class="legend-dot versicolor"></i>
+                    Versicolor
+                </span>
+
+                <span>
+                    <i class="legend-dot virginica"></i>
+                    Virginica
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <span>
+        IRIS AI · DATA VISUALIZATION
+    </span>
+
+    <span>
+        Machine Learning Project
+    </span>
+
+</footer>
+
+</body>
+
+</html>

@@ -1,231 +1,210 @@
-async function predictFlower() {
-
-    const sepalLength =
-        document.getElementById("sepal_length").value;
-
-    const sepalWidth =
-        document.getElementById("sepal_width").value;
-
-    const petalLength =
-        document.getElementById("petal_length").value;
-
-    const petalWidth =
-        document.getElementById("petal_width").value;
-
-    const error =
-        document.getElementById("error");
-
-    const result =
-        document.getElementById("result");
+/* =========================================================
+   IRIS AI - FRONTEND
+   ========================================================= */
 
 
-    error.innerHTML = "";
+function getNumber(id) {
 
+    const element =
+        document.getElementById(id);
 
-    // ==============================
-    // VALIDATION
-    // ==============================
-
-    const values = [
-        sepalLength,
-        sepalWidth,
-        petalLength,
-        petalWidth
-    ];
-
-    if (
-        values.some(
-            value =>
-                value === "" ||
-                Number(value) <= 0
-        )
-    ) {
-
-        error.innerHTML =
-            "⚠ Vui lòng nhập đầy đủ các giá trị lớn hơn 0.";
-
-        return;
+    if (!element) {
+        return null;
     }
 
-
-    // ==============================
-    // LOADING
-    // ==============================
-
-    result.innerHTML = `
-
-        <div class="loading">
-
-            <div class="loader"></div>
-
-            <h2>
-                AI đang phân tích...
-            </h2>
-
-            <p>
-                SVM đang tìm kiếm mẫu phù hợp.
-            </p>
-
-        </div>
-
-    `;
+    return parseFloat(
+        element.value
+    );
+}
 
 
-    // ==============================
-    // SEND REQUEST
-    // ==============================
+/* =========================================================
+   VALIDATION
+   ========================================================= */
 
-    try {
+function clearErrors() {
 
-        const response =
-            await fetch("/api/predict", {
+    const ids = [
+        "sepal_length",
+        "sepal_width",
+        "petal_length",
+        "petal_width"
+    ];
 
-                method: "POST",
+    ids.forEach(id => {
 
-                headers: {
-                    "Content-Type":
-                        "application/json"
-                },
-
-                body: JSON.stringify({
-
-                    sepal_length:
-                        Number(sepalLength),
-
-                    sepal_width:
-                        Number(sepalWidth),
-
-                    petal_length:
-                        Number(petalLength),
-
-                    petal_width:
-                        Number(petalWidth)
-
-                })
-
-            });
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Prediction failed"
+        const error =
+            document.getElementById(
+                "error_" + id
             );
+
+        const input =
+            document.getElementById(id);
+
+        if (error) {
+            error.textContent = "";
+        }
+
+        if (input) {
+            input.classList.remove(
+                "input-error"
+            );
+        }
+
+    });
+
+}
+
+
+function showError(
+    id,
+    message
+) {
+
+    const error =
+        document.getElementById(
+            "error_" + id
+        );
+
+    const input =
+        document.getElementById(id);
+
+    if (error) {
+        error.textContent =
+            message;
+    }
+
+    if (input) {
+        input.classList.add(
+            "input-error"
+        );
+    }
+
+}
+
+
+function validateInputs() {
+
+    clearErrors();
+
+    let valid = true;
+
+    const ids = [
+        "sepal_length",
+        "sepal_width",
+        "petal_length",
+        "petal_width"
+    ];
+
+    ids.forEach(id => {
+
+        const value =
+            getNumber(id);
+
+        if (
+            value === null ||
+            Number.isNaN(value)
+        ) {
+
+            showError(
+                id,
+                "Vui lòng nhập giá trị."
+            );
+
+            valid = false;
+
+        }
+        else if (value <= 0) {
+
+            showError(
+                id,
+                "Giá trị phải lớn hơn 0."
+            );
+
+            valid = false;
 
         }
 
+    });
 
-        const data =
-            await response.json();
-
-
-        // ==============================
-        // IMAGE
-        // ==============================
-
-        const image =
-            `/static/images/${data.prediction}.jpg`;
+    return valid;
+}
 
 
-        // ==============================
-        // RESULT
-        // ==============================
+/* =========================================================
+   SAMPLE DATA
+   ========================================================= */
 
-        result.innerHTML = `
+function fillSample() {
 
-            <div class="result-content">
-
-                <div class="result-image-wrapper">
-
-                    <img
-                        src="${image}"
-                        alt="${data.display_name}"
-                        class="flower-result-image"
-                    >
-
-                </div>
+    document.getElementById(
+        "sepal_length"
+    ).value = "5.1";
 
 
-                <div class="prediction-label">
-
-                    ✦ PREDICTION
-
-                </div>
+    document.getElementById(
+        "sepal_width"
+    ).value = "3.5";
 
 
-                <h2>
-                    ${data.display_name}
-                </h2>
+    document.getElementById(
+        "petal_length"
+    ).value = "1.4";
 
 
-                <div class="confidence">
-
-                    <div class="confidence-number">
-                        ${data.confidence}%
-                    </div>
-
-                    <div>
-                        SVM confidence
-                    </div>
-
-                </div>
+    document.getElementById(
+        "petal_width"
+    ).value = "0.2";
 
 
-                <div class="measurements">
+    clearErrors();
 
-                    <div>
-                        <span>Sepal Length</span>
-                        <strong>
-                            ${sepalLength} cm
-                        </strong>
-                    </div>
+}
 
-                    <div>
-                        <span>Sepal Width</span>
-                        <strong>
-                            ${sepalWidth} cm
-                        </strong>
-                    </div>
 
-                    <div>
-                        <span>Petal Length</span>
-                        <strong>
-                            ${petalLength} cm
-                        </strong>
-                    </div>
+/* =========================================================
+   RESET
+   ========================================================= */
 
-                    <div>
-                        <span>Petal Width</span>
-                        <strong>
-                            ${petalWidth} cm
-                        </strong>
-                    </div>
+function resetForm() {
 
-                </div>
+    const form =
+        document.getElementById(
+            "predictionForm"
+        );
 
-            </div>
-
-        `;
-
+    if (form) {
+        form.reset();
     }
 
+    clearErrors();
 
-    catch (err) {
+
+    const result =
+        document.getElementById(
+            "resultPanel"
+        );
+
+    if (result) {
 
         result.innerHTML = `
 
             <div class="result-placeholder">
 
-                <div class="big-flower">
-                    ⚠️
+                <div class="result-flower">
+                    🌸
                 </div>
 
                 <h2>
-                    Không thể dự đoán
+                    Đang chờ phân tích
                 </h2>
 
                 <p>
-                    Vui lòng kiểm tra server FastAPI.
+                    Nhập thông số và nhấn
+                    <strong>
+                        PHÂN TÍCH BẰNG AI
+                    </strong>
+                    để bắt đầu.
                 </p>
 
             </div>
@@ -237,22 +216,332 @@ async function predictFlower() {
 }
 
 
-function fillSample() {
+/* =========================================================
+   PREDICT
+   ========================================================= */
 
-    document.getElementById(
-        "sepal_length"
-    ).value = 5.1;
+async function predictFlower(event) {
 
-    document.getElementById(
-        "sepal_width"
-    ).value = 3.5;
+    event.preventDefault();
 
-    document.getElementById(
-        "petal_length"
-    ).value = 1.4;
 
-    document.getElementById(
-        "petal_width"
-    ).value = 0.2;
+    if (!validateInputs()) {
+
+        return;
+
+    }
+
+
+    const button =
+        document.querySelector(
+            ".predict-button"
+        );
+
+
+    const result =
+        document.getElementById(
+            "resultPanel"
+        );
+
+
+    const data = {
+
+        sepal_length:
+            getNumber("sepal_length"),
+
+        sepal_width:
+            getNumber("sepal_width"),
+
+        petal_length:
+            getNumber("petal_length"),
+
+        petal_width:
+            getNumber("petal_width")
+
+    };
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "⏳ ĐANG PHÂN TÍCH...";
+
+
+    result.innerHTML = `
+
+        <div class="result-placeholder">
+
+            <div class="result-flower">
+                🧠
+            </div>
+
+            <h2>
+                AI đang phân tích...
+            </h2>
+
+            <p>
+                Mô hình SVM đang xử lý
+                bốn đặc trưng của hoa.
+            </p>
+
+        </div>
+
+    `;
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/predict",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(data)
+                }
+            );
+
+
+        const resultData =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                resultData.message ||
+                "Không thể dự đoán."
+            );
+
+        }
+
+
+        showPrediction(
+            resultData
+        );
+
+    }
+
+    catch (error) {
+
+        result.innerHTML = `
+
+            <div class="result-placeholder">
+
+                <div class="result-flower">
+                    ⚠️
+                </div>
+
+                <h2>
+                    Có lỗi xảy ra
+                </h2>
+
+                <p>
+                    ${error.message}
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+    finally {
+
+        button.disabled = false;
+
+        button.textContent =
+            "✦ PHÂN TÍCH BẰNG AI";
+
+    }
 
 }
+
+
+/* =========================================================
+   SHOW RESULT
+   ========================================================= */
+
+function showPrediction(data) {
+
+    const result =
+        document.getElementById(
+            "resultPanel"
+        );
+
+
+    const confidence =
+        Number(data.confidence);
+
+
+    result.innerHTML = `
+
+        <div class="result-success">
+
+            <img
+                src="${data.image}"
+                class="result-image"
+                alt="${data.name_vi}"
+                onerror="this.style.display='none'"
+            >
+
+            <span class="small-label">
+                AI PREDICTION
+            </span>
+
+            <h2>
+                ${data.name_vi}
+            </h2>
+
+            <p>
+                ${data.description}
+            </p>
+
+
+            <div class="confidence">
+
+                <div style="
+                    display:flex;
+                    justify-content:space-between;
+                    margin-bottom:8px;
+                ">
+
+                    <span>
+                        Độ tin cậy
+                    </span>
+
+                    <strong>
+                        ${confidence}%
+                    </strong>
+
+                </div>
+
+
+                <div class="confidence-bar">
+
+                    <div
+                        class="confidence-fill"
+                        style="
+                            width:${confidence}%
+                        "
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <div class="result-details">
+
+                <div class="detail-box">
+
+                    <small>
+                        Tên khoa học
+                    </small>
+
+                    <strong>
+                        ${data.name}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <small>
+                        Màu sắc
+                    </small>
+
+                    <strong>
+                        ${data.color}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <small>
+                        Phân loại
+                    </small>
+
+                    <strong>
+                        ${data.class}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <small>
+                        Nguồn gốc
+                    </small>
+
+                    <strong>
+                        ${data.origin}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div
+                style="
+                    margin-top:20px;
+                    padding:18px;
+                    border-radius:16px;
+                    background:rgba(255,255,255,0.04);
+                "
+            >
+
+                <strong>
+                    Đặc điểm
+                </strong>
+
+                <p
+                    style="
+                        color:var(--muted);
+                        margin-bottom:0;
+                    "
+                >
+                    ${data.characteristic}
+                </p>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   AUTO SAMPLE
+   ========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        const form =
+            document.getElementById(
+                "predictionForm"
+            );
+
+        if (form) {
+
+            fillSample();
+
+        }
+
+    }
+);

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        IRIS AI | Đánh giá mô hình
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/style.css"
+    >
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <a href="/" class="brand">
+        <span class="brand-icon">✿</span>
+        IRIS AI
+    </a>
+
+    <nav>
+
+        <a href="/">
+            Trang chủ
+        </a>
+
+        <a href="/predict">
+            🔍 Tìm hoa
+        </a>
+
+        <a href="/visualization">
+            📊 Trực quan
+        </a>
+
+        <a href="/species">
+            🌸 Các loài hoa
+        </a>
+
+    </nav>
+
+</header>
+
+
+<main class="page">
+
+    <section class="page-header">
+
+        <div class="eyebrow">
+            MODEL EVALUATION
+        </div>
+
+        <h1>
+            Đánh giá mô hình SVM
+        </h1>
+
+        <p>
+            Kiểm tra hiệu quả phân loại của mô hình
+            trên tập dữ liệu Iris.
+        </p>
+
+    </section>
+
+
+    <section class="metric-grid" id="metrics">
+
+        <div class="metric-card">
+
+            <span>
+                ACCURACY
+            </span>
+
+            <strong id="accuracy">
+                ...
+            </strong>
+
+        </div>
+
+
+        <div class="metric-card">
+
+            <span>
+                PRECISION
+            </span>
+
+            <strong id="precision">
+                ...
+            </strong>
+
+        </div>
+
+
+        <div class="metric-card">
+
+            <span>
+                RECALL
+            </span>
+
+            <strong id="recall">
+                ...
+            </strong>
+
+        </div>
+
+
+        <div class="metric-card">
+
+            <span>
+                F1-SCORE
+            </span>
+
+            <strong id="f1">
+                ...
+            </strong>
+
+        </div>
+
+    </section>
+
+
+    <section class="analytics-grid">
+
+
+        <div class="glass-card">
+
+            <span class="small-label">
+                CONFUSION MATRIX
+            </span>
+
+            <h2>
+                Ma trận nhầm lẫn
+            </h2>
+
+
+            <div
+                id="confusionMatrix"
+                class="confusion"
+            >
+                Đang tải...
+            </div>
+
+        </div>
+
+
+        <div class="glass-card">
+
+            <span class="small-label">
+                CLASSIFICATION
+            </span>
+
+            <h2>
+                Kết quả theo từng loài
+            </h2>
+
+
+            <div
+                id="classificationReport"
+                class="report-list"
+            >
+                Đang tải...
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <span>
+        IRIS AI · MODEL EVALUATION
+    </span>
+
+    <span>
+        SVM RBF
+    </span>
+
+</footer>
+
+
+<script>
+
+async function loadAnalytics() {
+
+    try {
+
+        const response =
+            await fetch("/api/analytics");
+
+        const data =
+            await response.json();
+
+
+        document.getElementById("accuracy")
+            .textContent =
+            data.accuracy + "%";
+
+
+        document.getElementById("precision")
+            .textContent =
+            data.precision + "%";
+
+
+        document.getElementById("recall")
+            .textContent =
+            data.recall + "%";
+
+
+        document.getElementById("f1")
+            .textContent =
+            data.f1 + "%";
+
+
+        // CONFUSION MATRIX
+
+        const matrix =
+            document.getElementById(
+                "confusionMatrix"
+            );
+
+        matrix.innerHTML = "";
+
+        data.confusion_matrix.forEach(
+            (row, i) => {
+
+                row.forEach(
+                    (value, j) => {
+
+                        const cell =
+                            document.createElement(
+                                "div"
+                            );
+
+                        cell.className =
+                            "confusion-cell";
+
+                        cell.innerHTML = `
+                            <strong>${value}</strong>
+                            <small>
+                                ${data.classes[i]}
+                                →
+                                ${data.classes[j]}
+                            </small>
+                        `;
+
+                        matrix.appendChild(cell);
+
+                    }
+                );
+
+            }
+        );
+
+
+        // REPORT
+
+        const report =
+            document.getElementById(
+                "classificationReport"
+            );
+
+        report.innerHTML = "";
+
+        Object.entries(
+            data.classification_report
+        ).forEach(
+            ([name, values]) => {
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+                item.className =
+                    "report-item";
+
+                item.innerHTML = `
+
+                    <div class="report-name">
+                        ${name}
+                    </div>
+
+                    <div>
+                        Precision:
+                        <strong>
+                            ${values.precision}%
+                        </strong>
+                    </div>
+
+                    <div>
+                        Recall:
+                        <strong>
+                            ${values.recall}%
+                        </strong>
+                    </div>
+
+                    <div>
+                        F1:
+                        <strong>
+                            ${values["f1-score"]}%
+                        </strong>
+                    </div>
+
+                `;
+
+                report.appendChild(item);
+
+            }
+        );
+
+    }
+
+    catch(error) {
+
+        console.error(error);
+
+    }
+
+}
+
+
+loadAnalytics();
+
+</script>
+
+</body>
+
+</html>
