@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>IRIS AI • Identify</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/style.css"
+    >
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <a href="/" class="logo">
+        IRIS<span>AI</span>
+    </a>
+
+    <nav>
+
+        <a href="/">Home</a>
+
+        <a
+            href="/predict"
+            class="active"
+        >
+            Identify
+        </a>
+
+        <a href="/analytics">
+            Analytics
+        </a>
+
+        <a href="/flowers">
+            Iris
+        </a>
+
+    </nav>
+
+</header>
+
+
+<main class="page">
+
+    <div class="page-heading">
+
+        <div class="badge">
+            ✦ SVM CLASSIFIER
+        </div>
+
+        <h1>
+            Identify Your
+            <span>Iris</span>
+        </h1>
+
+        <p>
+            Nhập 4 thông số để AI xác định loài hoa.
+        </p>
+
+    </div>
+
+
+    <section class="predict-layout">
+
+
+        <div class="glass-panel">
+
+            <h2>
+                Flower measurements
+            </h2>
+
+            <p class="muted">
+                Đơn vị: centimetre (cm)
+            </p>
+
+
+            <div class="input-grid">
+
+                <div class="input-box">
+
+                    <label>
+                        Sepal Length
+                    </label>
+
+                    <input
+                        id="sepal_length"
+                        type="number"
+                        step="0.1"
+                        placeholder="5.1"
+                    >
+
+                </div>
+
+
+                <div class="input-box">
+
+                    <label>
+                        Sepal Width
+                    </label>
+
+                    <input
+                        id="sepal_width"
+                        type="number"
+                        step="0.1"
+                        placeholder="3.5"
+                    >
+
+                </div>
+
+
+                <div class="input-box">
+
+                    <label>
+                        Petal Length
+                    </label>
+
+                    <input
+                        id="petal_length"
+                        type="number"
+                        step="0.1"
+                        placeholder="1.4"
+                    >
+
+                </div>
+
+
+                <div class="input-box">
+
+                    <label>
+                        Petal Width
+                    </label>
+
+                    <input
+                        id="petal_width"
+                        type="number"
+                        step="0.1"
+                        placeholder="0.2"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="error"
+                class="error"
+            ></div>
+
+
+            <button
+                class="btn primary full"
+                onclick="predictFlower()"
+            >
+                ✦ ANALYZE FLOWER
+            </button>
+
+
+            <button
+                class="sample-button"
+                onclick="fillSample()"
+            >
+                ✨ Sử dụng mẫu Iris Setosa
+            </button>
+
+        </div>
+
+
+        <div
+            id="result"
+            class="result-card"
+        >
+
+            <div class="result-placeholder">
+
+                <div class="big-flower">
+                    🌸
+                </div>
+
+                <h2>
+                    Awaiting input
+                </h2>
+
+                <p>
+                    Nhập thông số để bắt đầu
+                    phân loại bằng SVM.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script src="/static/js/app.js"></script>
+
+</body>
+
+</html>
